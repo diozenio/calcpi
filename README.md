@@ -32,7 +32,7 @@ A seção corrente está destinada à discussão de questionamentos apontados pe
 
 A princípio, o código utiliza o escalonamento preemptivo, gerido pelo sistema operacional, implementado através da diretiva `#pragma omp parallel for num_threads(num_threads) reduction(+:pi)` da biblioteca OpenMP. Assim sendo, o sistema operacional aloca as threads aos processadores físicos e as gerencia de forma preemptiva, podendo interrompê-las e alternar entre elas para garantir um uso justo da CPU. Além do mais, é válido pontuar que as threads podem terminar em tempos diferentes, dependendo da duração de suas tarefas.
 
-Por fim, o modelo de threads implementado, com base no sistema operacional utilizado para a execução do projeto, é **many-to-many**. Isso pode ser observado através da diminuição significativa do tempo de execução à medida que o número de threads aumenta, indicando que o sistema operacional é capaz de executar diversas threads em paralelo e promover um gerenciamento eficiente de threads de usuário para threads kernel.
+Por fim, o modelo de threads implementado, com base no sistema operacional utilizado para a execução do projeto, é **one-to-one**. Cada thread gerada pela diretiva OpenMP será mapeada para uma thread de kernel, permitindo que o sistema operacional gerencie e escalone essas threads de forma eficiente e preemptiva.
 
 # Run
 
